@@ -1,0 +1,37 @@
+body{
+  color: #222;
+}
+
+img{
+  max-width: 100%;
+}
+
+main{
+  padding: 10px;
+  max-width: 500px;
+  margin: auto;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+}
+
+header a{
+  text-decoration: none;
+  color: inherit;
+
+}
+
+header a.logo{
+  font-weight: bold;
+}
+
+header nav{
+  display: flex;
+  gap: 10px;
+}
+
+div.post{
+  max-width: 100%;
+}
