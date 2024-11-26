@@ -2,17 +2,14 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-app.use(cors({
-    origin: 'http://localhost:3000', // Allow frontend to make requests
-  }));
-  app.use(express.json());  // Middleware to parse JSON bodies
+app.use(cors());
+app.use(express.json());
 
 app.post('/register', (req, res) => {
-    console.log(req.body);  // Check the request body
-    res.json({ message: "Registration successful" });  // Send response
+  const {username, password} = req.body;
+  res.json({requestData:{username, password}});
 });
 
-app.listen(4000, '0.0.0.0', () => {
-    console.log('Backend running on http://localhost:4000');
-  });
-  
+app.listen(4000, () => {
+  console.log('Backend running on http://localhost:4000');
+});
