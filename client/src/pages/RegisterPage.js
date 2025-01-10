@@ -34,14 +34,14 @@ export default function RegisterPage() {
             <h1>Register</h1>
             <input
                 type="text"
-                placeholder="username"
+                placeholder="Username"
                 value={username}
                 onChange={(ev) => setUsername(ev.target.value)}
                 required
             />
             <input
                 type="password"
-                placeholder="password"
+                placeholder="Password"
                 value={password}
                 onChange={(ev) => setPassword(ev.target.value)}
                 required
