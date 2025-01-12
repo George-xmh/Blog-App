@@ -1,15 +1,17 @@
 import { useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 export default function CreatePost() {
     const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
+    const [content, setContent] = useState(""); 
     const [image, setImage] = useState(null);
 
     async function handleCreatePost(ev) {
         ev.preventDefault();
         const formData = new FormData();
         formData.append("title", title);
-        formData.append("content", content);
+        formData.append("content", content); 
         formData.append("image", image);
 
         const response = await fetch("http://localhost:4000/posts", {
@@ -38,10 +40,11 @@ export default function CreatePost() {
             </div>
             <div className="form-group">
                 <label>Content</label>
-                <textarea
-                    placeholder="Write your content"
+                <ReactQuill
+                    theme="snow"
                     value={content}
-                    onChange={(e) => setContent(e.target.value)}
+                    onChange={setContent} 
+                    placeholder="Write your content here..."
                 />
             </div>
             <div className="form-group">

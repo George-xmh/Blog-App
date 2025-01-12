@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const multer = require("multer");
 
 const app = express();
 
@@ -20,6 +21,19 @@ const UserSchema = new mongoose.Schema({
 });
 const User = mongoose.model('User', UserSchema);
 
+// Post model
+const PostSchema = new mongoose.Schema({
+    title: { type: String, required: true },
+    content: { type: String, required: true },
+    image: { type: String }, // Stores the filename of the uploaded image
+    createdAt: { type: Date, default: Date.now },
+});
+const Post = mongoose.model('Post', PostSchema);
+
+// Multer Setup
+const upload = multer({ dest: "uploads/" });
+app.use("/uploads", express.static("uploads"));
+
 // Register route
 app.post('/register', async (req, res) => {
     const { username, password } = req.body;
@@ -34,7 +48,7 @@ app.post('/register', async (req, res) => {
         await newUser.save();
         res.json({ message: 'User registered successfully' });
     } catch (err) {
-        if (err.code === 11000) { // Duplicate username error
+        if (err.code === 11000) { 
             res.status(400).json({ error: 'Username already exists.' });
         } else {
             res.status(500).json({ error: 'Failed to register user', details: err });
@@ -64,6 +78,34 @@ app.post('/login', async (req, res) => {
         res.json({ message: 'Login successful!' });
     } catch (err) {
         res.status(500).json({ error: 'Failed to log in', details: err });
+    }
+});
+
+// Create post route
+app.post("/posts", upload.single("image"), async (req, res) => {
+    const { title, content } = req.body;
+    const image = req.file ? req.file.filename : null;
+
+    if (!title || !content) {
+        return res.status(400).json({ error: "Title and content are required." });
+    }
+
+    try {
+        const newPost = new Post({ title, content, image });
+        await newPost.save();
+        res.status(201).json({ message: "Post created successfully!", post: newPost });
+    } catch (err) {
+        res.status(500).json({ error: "Failed to create post", details: err });
+    }
+});
+
+// Fetch posts route
+app.get("/posts", async (req, res) => {
+    try {
+        const posts = await Post.find().sort({ createdAt: -1 });
+        res.json(posts);
+    } catch (err) {
+        res.status(500).json({ error: "Failed to fetch posts", details: err });
     }
 });
 
