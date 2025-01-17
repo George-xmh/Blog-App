@@ -25,10 +25,31 @@ const User = mongoose.model('User', UserSchema);
 const PostSchema = new mongoose.Schema({
     title: { type: String, required: true },
     content: { type: String, required: true },
-    image: { type: String }, // Stores the filename of the uploaded image
+    image: { type: String },
     createdAt: { type: Date, default: Date.now },
 });
 const Post = mongoose.model('Post', PostSchema);
+
+// Delete a post
+app.delete("/posts/:id", async (req, res) => {
+    try {
+        await Post.findByIdAndDelete(req.params.id);
+        res.status(200).json({ message: "Post deleted successfully!" });
+    } catch (err) {
+        res.status(500).json({ error: "Failed to delete post", details: err });
+    }
+});
+
+// Update a post
+app.put("/posts/:id", async (req, res) => {
+    const { title, content } = req.body;
+    try {
+        const updatedPost = await Post.findByIdAndUpdate(req.params.id, { title, content }, { new: true });
+        res.status(200).json({ message: "Post updated successfully!", post: updatedPost });
+    } catch (err) {
+        res.status(500).json({ error: "Failed to update post", details: err });
+    }
+});
 
 // Multer Setup
 const upload = multer({ dest: "uploads/" });
@@ -86,8 +107,8 @@ app.post("/posts", upload.single("image"), async (req, res) => {
     const { title, content } = req.body;
     const image = req.file ? req.file.filename : null;
 
-    if (!title || !content) {
-        return res.status(400).json({ error: "Title and content are required." });
+    if (!title || !content || !image) {
+        return res.status(400).json({ error: "Title, Content, and Image are required." });
     }
 
     try {
@@ -112,3 +133,4 @@ app.get("/posts", async (req, res) => {
 app.listen(4000, () => {
     console.log('Backend running on http://localhost:4000');
 });
+

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -6,6 +7,7 @@ export default function CreatePost() {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState(""); 
     const [image, setImage] = useState(null);
+    const navigate = useNavigate();
 
     async function handleCreatePost(ev) {
         ev.preventDefault();
@@ -21,6 +23,7 @@ export default function CreatePost() {
 
         if (response.ok) {
             alert("Post created successfully!");
+            navigate("/");
         } else {
             alert("Failed to create post.");
         }
