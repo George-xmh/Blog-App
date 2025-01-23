@@ -1,4 +1,4 @@
-# 🚀 **BlogmE** 🖋️📸  
+# 🚀 **BlogMe** 🖋️📸  
 
 A full-stack blogging platform designed for creating, managing, and sharing content with rich text formatting and image uploads.
 
