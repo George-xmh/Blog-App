@@ -67,11 +67,11 @@ A full-stack blogging platform designed for creating, managing, and sharing cont
 ✏️ _A simple and intuitive interface for creating and editing blog posts._  
 - **Create Post Form**  
   ![image](https://github.com/user-attachments/assets/b30ec0c1-e2c3-431d-88af-c47fd599d032)  
-- **Post Editing Interface**  
+- **Post Creation View**  
   ![image](https://github.com/user-attachments/assets/59f855a0-c877-43f5-b85c-a6d8d7d8a52b)  
-- **Formatted Content Preview**  
+- **Editing Interface**  
   ![image](https://github.com/user-attachments/assets/22ff8290-a80b-44a5-ab61-ec0552f3ba91)  
-- **Post Submission View**  
+- **Post Edit View**  
   ![image](https://github.com/user-attachments/assets/d19a63bb-2692-4094-8c38-645648be0e18)
 
 ---
