@@ -10,11 +10,6 @@ A full-stack blogging platform designed for creating, managing, and sharing cont
 3. [🛠️ Tech Stack](#️-tech-stack)
 4. [🚀 Getting Started](#-getting-started)
 5. [📸 Screenshots](#-screenshots)
-6. [📚 API Documentation](#-api-documentation)
-7. [🔮 Future Enhancements](#-future-enhancements)
-8. [🤝 Contributing](#-contributing)
-9. [📜 License](#-license)
-10. [🙌 Acknowledgments](#-acknowledgments)
 
 ---
 
